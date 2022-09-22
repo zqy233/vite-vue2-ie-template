@@ -1,0 +1,38 @@
+/* 改变主题色变量 */
+$--color-primary: #8956ff;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: "element-ui/lib/theme-chalk/fonts";
+
+/* prettier-ignore */
+:root {
+  --el-menu-item-font-size: 16px;
+  --el-submenu-base-level-padding: 0PX;
+  --el-menu-item-height: 36PX;
+  --el-menu-sub-item-height: 36PX;
+  --el-border-radius-small:5PX;
+  --el-message-close-size:20PX;
+  --el-menu-base-level-padding:10PX;
+  --el-menu-level-padding:10px;
+}
+
+/* prettier-ignore */
+.el-dialog {
+  --el-dialog-content-font-size: 40PX!important;
+  --el-dialog-padding-primary: 20PX ;
+}
+
+$green: #09908a;
+
+.el-menu {
+  border-right: 0px;
+}
+
+/* prettier-ignore */
+.el-popper {
+  padding: 10PX;
+
+  span {
+    font-size: 14PX;
+  }
+}
