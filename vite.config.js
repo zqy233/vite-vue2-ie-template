@@ -37,7 +37,7 @@ export default defineConfig({
             ["Message", "message"],
           ],
         },
-      ], // 自动导入函数
+      ],
       dts: false,
       resolvers: [],
     }),
