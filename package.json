@@ -2,7 +2,7 @@
   "name": "vue2-ie-template",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
+    "dev": "npx simple-git-hooks & vite",
     "build": "vite build"
   },
   "engines": {
@@ -47,7 +47,7 @@
   },
   "packageManager": "pnpm@7.27.0",
   "simple-git-hooks": {
-    "pre-commit": "npx simple-git-hooks && npx lint-staged"
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*": [
