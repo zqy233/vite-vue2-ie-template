@@ -6,6 +6,8 @@
 
 > 模板只实现了登录页面，其他页面自行添加吧
 
+### 依赖说明
+
 对应 vue2 使用指定版本的依赖包，其余依赖包全部使用最新版本
 
 - vue `2.7.14` 使用 2+版本的最新
@@ -14,6 +16,9 @@
 - element-ui `2.15.13` element-ui 对应 vue2，element-plus 对应 vue3
 - vxe-table `3.6.10` 一款使用开发可编辑表格的表格组件库，使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
 - sass `1.32.13` element-ui 不支持高版本的 sass，会在控制台大量警告，固定使用`1.32.13`版本(https://github.com/ElemeFE/element/issues/21071)
+- @vitejs/plugin-legacy 依赖 terser 和@babel/preset-env
+- simple-git-hooks、prettier、lint-staged 用于 git commit 时自动格式化代码
+- 以及一些常用的库，如果不需要可以自行删减
 
 ### vite 插件
 
