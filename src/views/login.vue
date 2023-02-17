@@ -1,15 +1,49 @@
 <template>
   <div class="login-page">
     <div class="login">
-      <el-form ref="loginForm" :model="loginForm" class="login-form" autocomplete="on" label-position="left">
+      <el-form
+        ref="loginForm"
+        :model="loginForm"
+        class="login-form"
+        autocomplete="on"
+        label-position="left"
+      >
         <p class="form-title">登录</p>
-        <el-form-item prop="username" required :show-message="false">
-          <el-input v-model="loginForm.username" placeholder="请输入用户名" type="text" autocomplete="on" @keyup.enter="handleLogin" />
+        <el-form-item
+          prop="username"
+          required
+          :show-message="false"
+        >
+          <el-input
+            v-model="loginForm.username"
+            placeholder="请输入用户名"
+            type="text"
+            autocomplete="on"
+            @keyup.enter="handleLogin"
+          />
         </el-form-item>
-        <el-form-item prop="password" required :show-message="false">
-          <el-input ref="password" v-model="loginForm.password" placeholder="请输入密码" type="password" autocomplete="on" @keyup.enter="handleLogin"> </el-input>
+        <el-form-item
+          prop="password"
+          required
+          :show-message="false"
+        >
+          <el-input
+            ref="password"
+            v-model="loginForm.password"
+            placeholder="请输入密码"
+            type="password"
+            autocomplete="on"
+            @keyup.enter="handleLogin"
+          >
+          </el-input>
         </el-form-item>
-        <el-button class="login-btn" type="primary" @click="handleLogin"> 登录 </el-button>
+        <el-button
+          class="login-btn"
+          type="primary"
+          @click="handleLogin"
+        >
+          登录
+        </el-button>
       </el-form>
     </div>
   </div>
@@ -20,26 +54,26 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "",
-        password: ""
-      }
-    }
+        username: '',
+        password: '',
+      },
+    };
   },
   methods: {
     /** 校验登录 */
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) this.login()
-        return false
-      })
+        if (valid) this.login();
+        return false;
+      });
     },
     login() {
       // 这里使用unplugin-auto-import导入的，在vite.config.js中AutoImport中配置的
-      message.success("没有后续页面啦")
-      notification.success("后续需要你自己写啦")
-    }
-  }
-}
+      message.success('没有后续页面啦');
+      notification.success('后续需要你自己写啦');
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
