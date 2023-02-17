@@ -9,7 +9,7 @@
         label-position="left"
       >
         <p class="form-title">登录</p>
-        <el-form-item
+                     <el-form-item
           prop="username"
           required
           :show-message="false"

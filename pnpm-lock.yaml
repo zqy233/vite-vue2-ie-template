@@ -31,7 +31,6 @@ dependencies:
   element-ui: 2.15.13_vue@2.7.14
   lodash: 4.17.21
   nprogress: 0.2.0
-  prettier: 2.8.4
   qs: 6.11.0
   vue: 2.7.14
   vue-router: 3.6.5_vue@2.7.14
@@ -45,6 +44,7 @@ devDependencies:
   '@vitejs/plugin-vue2': 2.2.0_vite@4.1.1+vue@2.7.14
   compressing: 1.7.0
   lint-staged: 13.1.2
+  prettier: 2.8.4
   sass: 1.32.13
   simple-git-hooks: 2.8.1
   terser: 5.16.3
@@ -4079,7 +4079,7 @@ packages:
     resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
-    dev: false
+    dev: true
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
