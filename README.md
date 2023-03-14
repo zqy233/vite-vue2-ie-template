@@ -31,7 +31,51 @@
 public/config.js 可以用于写入一些不希望被打包压缩的配置，比如设置请求地址等等
 
 <details>
-<summary><h3>element-ui 自定义主题色与unplugin-vue-components按需导入样式冲突解决</h3></summary><br>
+<summary><h3>问题解决：unplugin-vue-components 按需导入样式导致vite热更新卡顿</h3></summary><br>
+
+`unplugin-vue-components`插件，开发环境按需导入样式会导致 vite 热更新卡顿
+
+> https://github.com/antfu/unplugin-vue-components/issues/361
+
+所以开发环境不按需导入样式，生产环境再按需导入样式
+
+```js
+      Components({
+        resolvers: [
+          ElementUiResolver({
+            importStyle: mode === 'development' ? false : 'sass',
+          }),
+        ],
+      }),
+```
+
+按需导入样式不支持函数式组件样式，需要在`vite.config.js`中手动导入函数式组件的样式，定义一个插件，生产环境添加函数式组件的样式
+
+```js
+{
+        name: 'import-element-ui-style',
+        enforce: 'pre',
+        transform(code, id) {
+          ...
+          if (/src\/main.js$/.test(id)) {
+            if (mode === 'production') {
+              return {
+                code: `${code}
+                import 'element-ui/lib/theme-chalk/message.css';
+                import 'element-ui/lib/theme-chalk/notification.css';
+                import 'element-ui/lib/theme-chalk/message-box.css';`,
+                map: null,
+              };
+            }
+          }
+        },
+      },
+```
+
+<br></details>
+
+<details>
+<summary><h3>问题解决：element-ui 自定义主题色与unplugin-vue-components按需导入样式冲突解决</h3></summary><br>
 
 > element-ui 自定义主题色 https://element.eleme.cn/2.0/#/zh-CN/component/custom-theme
 
@@ -61,30 +105,14 @@ Vue.use(Element);
 
 #### 再看下使用`unplugin-vue-components`按需导入样式下怎么自定义主题色
 
-1.`unplugin-vue-components`插件，开发环境按需导入样式会导致页面卡顿
-
-> https://github.com/antfu/unplugin-vue-components/issues/361
-
-所以开发环境不按需导入样式，生产环境再按需导入样式
-
-```js
-      Components({
-        resolvers: [
-          ElementUiResolver({
-            importStyle: mode === 'development' ? false : 'sass',
-          }),
-        ],
-      }),
-```
-
-2.`common.scss`生产环境需要去除这两行，因为会与`unplugin-vue-components`按需导入样式冲突，重复导入样式了
+`common.scss`生产环境需要去除这两行，因为会与`unplugin-vue-components`按需导入样式冲突，重复导入样式了
 
 ```js
 $--font-path: 'element-ui/lib/theme-chalk/fonts';
 @import 'element-ui/packages/theme-chalk/src/index.scss';
 ```
 
-3.新建一个`element-variables.scss`全局 scss 变量文件，将 element-ui 的主题变量如`$--color-primary: #8956ff;`等移动到该文件中，因为`unplugin-vue-components`按需导入样式需要在`additionalData`全局 scss 变量文件中定义主题变量才能生效
+新建一个`element-variables.scss`全局 scss 变量文件，将 element-ui 的主题变量如`$--color-primary: #8956ff;`等移动到该文件中，因为`unplugin-vue-components`的原因，需要在`additionalData`全局 scss 变量文件中定义主题变量才能生效
 
 注意！这个 scss 变量文件只应该存放一些 scss 变量，如果在这个文件里`$--font-path: 'element-ui/lib/theme-chalk/fonts';@import 'element-ui/packages/theme-chalk/src/index.scss';`会导致每次页面热更新时都会编译所有 element-ui 变量，热更新会卡顿至 3 秒左右
 
@@ -99,7 +127,7 @@ $--font-path: 'element-ui/lib/theme-chalk/fonts';
     },
 ```
 
-综上，定义一个 vite 插件，只有开发时才在`common.scss`中加入上方两行代码，并且生产环境需要在`src/main.js`中手动导入函数式组件的样式
+综上，定义一个 vite 插件，只有开发时才在`common.scss`中加入这两行代码
 
 ```js
 {
@@ -116,17 +144,7 @@ $--font-path: 'element-ui/lib/theme-chalk/fonts';
               };
             }
           }
-          if (/src\/main.js$/.test(id)) {
-            if (mode === 'production') {
-              return {
-                code: `${code}
-                import 'element-ui/lib/theme-chalk/message.css';
-                import 'element-ui/lib/theme-chalk/notification.css';
-                import 'element-ui/lib/theme-chalk/message-box.css';`,
-                map: null,
-              };
-            }
-          }
+          ...
         },
       },
 ```
