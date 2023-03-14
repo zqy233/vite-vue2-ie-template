@@ -31,11 +31,11 @@
 public/config.js 可以用于写入一些不希望被打包压缩的配置，比如设置请求地址等等
 
 <details>
-<summary><h3>element-ui 自定义主题色与`unplugin-vue-components`按需导入样式冲突解决</h3></summary><br>
+<summary><h3>element-ui 自定义主题色与unplugin-vue-components按需导入样式冲突解决</h3></summary><br>
 
 > element-ui 自定义主题色 https://element.eleme.cn/2.0/#/zh-CN/component/custom-theme
 
-#### 首先先来看下不使用`unplugin-vue-components`按需导入样式下怎么自定义主题色
+#### 首先看下不使用`unplugin-vue-components`按需导入样式下怎么自定义主题色
 
 创建`common.scss`文件，文件目录`src/assets/css/common.scss`，并在`main.js`中引入
 
@@ -59,7 +59,7 @@ Vue.use(Element);
 
 无需引入 Element 编译好的 CSS 文件`element-ui/lib/theme-chalk/index.css`
 
-#### 使用`unplugin-vue-components`按需导入样式下怎么自定义主题色
+#### 再看下使用`unplugin-vue-components`按需导入样式下怎么自定义主题色
 
 1.`unplugin-vue-components`插件，开发环境按需导入样式会导致页面卡顿
 
@@ -68,7 +68,6 @@ Vue.use(Element);
 所以开发环境不按需导入样式，生产环境再按需导入样式
 
 ```js
-//自动按需导入组件
       Components({
         resolvers: [
           ElementUiResolver({
@@ -85,16 +84,14 @@ $--font-path: 'element-ui/lib/theme-chalk/fonts';
 @import 'element-ui/packages/theme-chalk/src/index.scss';
 ```
 
-3.新建一个`element-variables.scss`全局 scss 变量文件，将 element-ui 的主题变量如`$--color-primary: #8956ff;`等移动到该文件中，因为`unplugin-vue-components`按需导入样式需要在该文件中定义主题变量才能生效
+3.新建一个`element-variables.scss`全局 scss 变量文件，将 element-ui 的主题变量如`$--color-primary: #8956ff;`等移动到该文件中，因为`unplugin-vue-components`按需导入样式需要在`additionalData`全局 scss 变量文件中定义主题变量才能生效
 
-注意！这个 scss 变量文件只应该存放一些 scss 变量，如果在这个文件里`@import 'element-ui/packages/theme-chalk/src/index.scss';`会导致每次页面热更新时都会编译所有 element-ui 变量，热更新会卡顿至 3 秒左右
+注意！这个 scss 变量文件只应该存放一些 scss 变量，如果在这个文件里`$--font-path: 'element-ui/lib/theme-chalk/fonts';@import 'element-ui/packages/theme-chalk/src/index.scss';`会导致每次页面热更新时都会编译所有 element-ui 变量，热更新会卡顿至 3 秒左右
 
 ```js
-  // 全局scss变量文件
     css: {
       preprocessorOptions: {
         scss: {
-          // 全部导入需要在main.js中导入的全局样式中使用变量，按需导入需要在全局sass变量使用element-ui变量
           additionalData: `@import "src/assets/css/element-variables.scss";`,
           charset: false,
         },
