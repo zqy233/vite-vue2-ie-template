@@ -1,9 +1,9 @@
 ### 基于 vite+vue2
 
 > vue3 不支持 ie，所以基于 vue2 版本下的技术栈最新版本搭建模板，完美兼容 ie11
-
+>
 > 使用 ie 打开并预览 <https://zqy233.github.io/vite-vue2-ie-template/#/login> 👈
-
+>
 > 模板只实现了登录页面，其他页面自行添加吧
 
 ### 依赖说明
@@ -30,7 +30,8 @@
 
 public/config.js 可以用于写入一些不希望被打包压缩的配置，比如设置请求地址等等
 
-### element-ui 自定义主题色与`unplugin-vue-components`按需导入样式冲突解决
+<details>
+<summary><h3>element-ui 自定义主题色与`unplugin-vue-components`按需导入样式冲突解决</h3></summary><br>
 
 > element-ui 自定义主题色 https://element.eleme.cn/2.0/#/zh-CN/component/custom-theme
 
@@ -60,7 +61,7 @@ Vue.use(Element);
 
 #### 使用`unplugin-vue-components`按需导入样式下怎么自定义主题色
 
-1.`unplugin-vue-components`插件，开发环境按需导入会导致页面卡顿
+1.`unplugin-vue-components`插件，开发环境按需导入样式会导致页面卡顿
 
 > https://github.com/antfu/unplugin-vue-components/issues/361
 
@@ -132,3 +133,5 @@ $--font-path: 'element-ui/lib/theme-chalk/fonts';
         },
       },
 ```
+
+<br></details>
