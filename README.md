@@ -127,7 +127,7 @@ $--font-path: 'element-ui/lib/theme-chalk/fonts';
     },
 ```
 
-综上，定义一个 vite 插件，只有开发时才在`common.scss`中加入这两行代码
+定义一个 vite 插件，只有开发时才在`common.scss`中加入这两行代码
 
 ```js
 {
