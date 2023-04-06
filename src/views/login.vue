@@ -6,42 +6,35 @@
         :model="loginForm"
         class="login-form"
         autocomplete="on"
-        label-position="left"
-      >
+        label-position="left">
         <p class="form-title">登录</p>
-                     <el-form-item
+        <el-form-item
           prop="username"
           required
-          :show-message="false"
-        >
+          :show-message="false">
           <el-input
             v-model="loginForm.username"
             placeholder="请输入用户名"
             type="text"
             autocomplete="on"
-            @keyup.enter="handleLogin"
-          />
+            @keyup.enter="handleLogin" />
         </el-form-item>
         <el-form-item
           prop="password"
           required
-          :show-message="false"
-        >
+          :show-message="false">
           <el-input
             ref="password"
             v-model="loginForm.password"
             placeholder="请输入密码"
             type="password"
             autocomplete="on"
-            @keyup.enter="handleLogin"
-          >
-          </el-input>
+            @keyup.enter="handleLogin"></el-input>
         </el-form-item>
         <el-button
           class="login-btn"
           type="primary"
-          @click="handleLogin"
-        >
+          @click="handleLogin">
           登录
         </el-button>
       </el-form>
@@ -62,7 +55,7 @@ export default {
   methods: {
     /** 校验登录 */
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) this.login();
         return false;
       });

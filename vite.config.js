@@ -24,6 +24,7 @@ export default ({ mode }) => {
     build: {
       // 打包输出文件夹
       outDir: 'docs',
+      sourcemap: true,
     },
     plugins: [
       vue2(),
