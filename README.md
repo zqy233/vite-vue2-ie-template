@@ -107,7 +107,7 @@ Vue.use(Element);
 
 `common.scss`生产环境需要去除这两行，因为会与`unplugin-vue-components`按需导入样式冲突，重复导入样式了
 
-```js
+```scss
 $--font-path: 'element-ui/lib/theme-chalk/fonts';
 @import 'element-ui/packages/theme-chalk/src/index.scss';
 ```
@@ -127,7 +127,7 @@ $--font-path: 'element-ui/lib/theme-chalk/fonts';
     },
 ```
 
-综上，定义一个 vite 插件，只有开发时才在`common.scss`中加入这两行代码
+定义一个 vite 插件，只有开发时才在`common.scss`中加入这两行代码
 
 ```js
 {
