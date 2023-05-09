@@ -14,7 +14,7 @@
 - vue-router `3.6.5` 使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
 - vuex `3.6.2` 使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
 - element-ui `2.15.13` element-ui 对应 vue2，element-plus 对应 vue3
-- vxe-table `3.6.10` 一款使用开发可编辑表格的表格组件库，使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
+- vxe-table `3.6.13` 一款使用开发可编辑表格的表格组件库，使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
 - sass `1.32.13` element-ui 不支持高版本的 sass，会在控制台大量警告，固定使用`1.32.13`版本(https://github.com/ElemeFE/element/issues/21071)
 - @vitejs/plugin-legacy 依赖 terser 和@babel/preset-env
 - simple-git-hooks、prettier、lint-staged 用于 git commit 时自动格式化代码
