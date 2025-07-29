@@ -1,23 +1,41 @@
 ### 基于 vite+vue2
 
-> vue3 不支持ie，vue2 版本使用 @vitejs/plugin-legacy 生产环境打包时做兼容性处理，可以兼容ie11，所以使用 vue2 技术栈最新版本搭建模板
+> vue3 不支持ie，vue2 版本使用 @vitejs/plugin-legacy 生产环境打包时做兼容性处理，可以兼容ie11和ie10，所以使用 vue2 技术栈最新版本搭建模板
 >
-> 常见问题：开发时ie白屏是正常的，@vitejs/plugin-legacy 是生产环境打包时做兼容性处理，可以打包后使用 vscode 的 Live Server 插件运行打包文件夹html，查看ie上是否正常显示
+> 环境要求：nodejs为最新版本24.4.1，pnpm为最新版本10.13.1
 >
-> 使用ie打开并预览 <https://zqy233.github.io/vite-vue2-ie-template/#/login> 👈，注意：需要右键>检查>勾选ie版本为11（默认ie版本为7）
+> 使用ie打开并预览 <https://zqy233.github.io/vite-vue2-ie-template/#/login> 👈，注意：需要ie版本为11或10（默认ie版本为7，需要手动切换一下版本）
 >
 > 模板只实现了登录页面，其他页面自行添加吧
 
+### 注意点一-Vite 不再支持已结束生命周期（EOL）的 Node.js 18。现在需要使用 Node.js 20.19+ 或 22.12+。
+
+经过个人测试，升级nodejs到目前最新版本24.5.1，开发和打包运行良好
+
+### 注意点二-开发时ie白屏是正常的
+
+@vitejs/plugin-legacy是生产环境打包时做兼容性处理，只能打包后再验证ie打开是否正常
+
+### 注意点三-默认ie打开白屏是正常的，默认是7，需要切换到11
+
+最新方案，可以通过设置edge浏览器来切换指定ie版本：
+
+1. 可以打包后使用 vscode 的 Live Server 插件运行打包后文件夹的html，通过edge浏览器访问地址
+2. edge浏览器右上角菜单选择在ie模式下加载
+3. 在windows搜索栏输入`%systemroot%\system32\f12\IEChooser.exe`并回车，打开的弹窗中选择edge打开的html网页，右上角就能选择对应的ie版本了
+
+经过个人测试，ie11和ie10都能正常显示打包后的页面，再低的ie版本就不行了
+
 ### 依赖说明
 
-对应 vue2 使用指定版本的依赖包，其余依赖包全部使用最新版本
+对应 vue2 技术栈使用指定版本的依赖包，其余依赖包全部使用最新版本
 
-- vue 使用 2+版本的最新
-- vue-router 使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
-- vuex 使用 3+版本的最新（3+对应 vue2，4+对应 vue3）
-- 使用element-ui，element-ui 对应 vue2，element-plus 对应 vue3
+- vue 使用 2+版本的最新 2.7.16（vue2不再更新，最后一个 vue2 版本了）
+- vue-router 使用 3+版本的最新 3.6.5（3+对应 vue2，4+对应 vue3，且随着 vue2 不再更新，3+版本不再更新了）
+- vuex 使用 3+版本的最新 3.6.2（3+对应 vue2，4+对应 vue3，且随着 pinia 出现，vuex 不再更新了）
+- 使用element-ui最新版本2.15.14（element-ui 对应 vue2，element-plus 对应 vue3，且随着 element-plus 出现，element-ui 基本不更新了）
 - vxe-table（一款使用开发可编辑表格的表格组件库）使用 3+版本的最新（3+对应 vue2，4+对应 vue3），该组件库依赖 xe-utils (该组件库的工具库)
-- sass `1.32.13` element-ui 不支持高版本的 sass，会在控制台大量警告，固定使用`1.32.13`版本(https://github.com/ElemeFE/element/issues/21071)
+- sass使用目前最新版本，element-ui 不支持高版本的 sass，会在控制台大量警告，但通过vite配置sass，可实现控制台不打印这些警告
 - @vitejs/plugin-legacy 依赖 terser 和@babel/preset-env
 - simple-git-hooks、prettier、lint-staged 用于 git commit 时自动格式化代码
 - 以及一些常用的库，如果不需要可以自行删减

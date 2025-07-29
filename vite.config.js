@@ -3,10 +3,10 @@ import legacy from '@vitejs/plugin-legacy';
 import vue2 from '@vitejs/plugin-vue2';
 import { resolve } from 'path';
 import Components from 'unplugin-vue-components/vite';
-// 打包后自动压缩生成zip，源码来自rollup-plugin-compression
-import { compression } from './plugin/zip.js';
 import { ElementUiResolver } from 'unplugin-vue-components/resolvers';
 import AutoImport from 'unplugin-auto-import/vite';
+// 打包后自动压缩生成zip，源码来自rollup-plugin-compression
+import { compression } from './plugin/zip.js';
 
 export default ({ mode }) => {
   console.log(mode === 'development' ? '开发环境 ' + mode : '生产环境 ' + mode);
@@ -16,8 +16,16 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "src/assets/css/element-variables.scss";`,
+          additionalData: `@import "@/assets/css/element-variables.scss";`,
           charset: false,
+          // 解决scss解析element-ui导致开发和生产出现很多废弃警告，通过以下两个配置关闭：
+          silenceDeprecations: [
+            'slash-div',
+            'import',
+            'mixed-decls',
+            'global-builtin',
+          ], // 明确指定要“静音”的弃用警告类型
+          quietDeps: true, // 第三方库的弃用警告，不打印
         },
       },
     },

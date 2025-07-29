@@ -7,6 +7,7 @@ import store from './store';
 // import Echarts from "vue-echarts"
 // Vue.component("Echarts", Echarts)
 
+// 封装一个全局请求图片资源的函数
 import { requireImg } from '@/utils/requireImg';
 Vue.prototype.requireImg = requireImg;
 

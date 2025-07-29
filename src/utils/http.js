@@ -10,13 +10,9 @@ const instance = axios.create({
   baseURL: window.BASE_URL, // 接口地址在config.js中定义
 });
 
-// instance.defaults.headers.post = {
-//   "Content-Type": "Content-Type:multipart/form-data"
-// }
-
 const CancelToken = axios.CancelToken; // 需要通过这个token主动关闭axios请求
 instance.interceptors.request.use(
-  req => {
+  (req) => {
     const source = CancelToken.source();
     req.cancelToken = source.token;
     store.commit('addRequest', source);
@@ -24,15 +20,15 @@ instance.interceptors.request.use(
     store.commit('loadStatus', true);
     return req;
   },
-  error => error,
+  (error) => error
 );
 instance.interceptors.response.use(
-  res => {
+  (res) => {
     loadingCount--;
     if (loadingCount == 0) store.commit('loadStatus', false);
     if (res.status == 200) return res;
   },
-  err => {
+  (err) => {
     loadingCount--;
     if (loadingCount == 0) store.commit('loadStatus', false);
     if (
@@ -45,7 +41,7 @@ instance.interceptors.response.use(
     const { response } = err;
     errorHandle(response.status, response.data);
     return response;
-  },
+  }
 );
 const errorHandle = (status, other) => {
   switch (status) {
